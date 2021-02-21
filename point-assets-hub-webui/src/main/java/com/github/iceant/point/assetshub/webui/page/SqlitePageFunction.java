@@ -53,11 +53,13 @@ public class SqlitePageFunction<T> implements PageFunction{
             @Override
             public void setValues(PreparedStatement ps) throws SQLException {
                 int i = 0;
-                for(; i<params.size(); i++){
-                    ps.setObject(i+1, params.get(i));
+                if(params!=null && params.size()>0) {
+                    for (; i < params.size(); i++) {
+                        ps.setObject(i + 1, params.get(i));
+                    }
                 }
-                ps.setObject(i++, pageRequest.getPageSize());
-                ps.setObject(i++, offset);
+                ps.setObject(++i, pageRequest.getPageSize());
+                ps.setObject(++i, offset);
             }
         }, rowMapper);
         return Page.makePage(pageRequest.getPageNumber(), pageRequest.getPageSize(), data, dataSize);
