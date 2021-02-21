@@ -38,7 +38,7 @@ public class SecurityApiController {
             SecurityContextHolder.getContext().setAuthentication(token);
             return WebResponse.makeSuccess();
         } else {
-            return WebResponse.makeFail().setCode(ResultCode.INVALID_AUTHCODE.ordinal());
+            return WebResponse.makeFail().setCode(ResultCode.INVALID_AUTHCODE.code());
         }
     }
 }
