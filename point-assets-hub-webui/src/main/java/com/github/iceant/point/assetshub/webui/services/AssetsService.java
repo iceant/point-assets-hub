@@ -38,4 +38,7 @@ public class AssetsService {
         return assetsDAO.delete(assetsDO);
     }
 
+    public AssetsDO findByPk(Long id) {
+        return assetsDAO.findByPk(id);
+    }
 }

@@ -1,0 +1,19 @@
+###
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{"username": "admin", "password": "password"}
+
+###
+POST http://localhost:8080/api/assets/create
+Content-Type: application/json
+
+{
+  "groupId": "com.github.iceant",
+  "artifactId": "test-artifact",
+  "version": "1.0",
+  "detail": "N/A"
+}
+
+###
+GET http://localhost:8080/api/assets/get/1

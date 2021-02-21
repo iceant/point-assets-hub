@@ -36,7 +36,7 @@ public class AssetsDAO {
                     obj.setGroupId(resultSet.getString("groupId"));
                     obj.setArtifactId(resultSet.getString("artifactId"));
                     obj.setVersion(resultSet.getString("version"));
-                    obj.setCreateDatetime(resultSet.getDate("createDatetime"));
+                    obj.setCreateDatetime(resultSet.getTimestamp("createDatetime"));
                     obj.setDetail(resultSet.getString("detail"));
                     return obj;
                 } else {
@@ -151,7 +151,7 @@ public class AssetsDAO {
         return delete(obj);
     }
 
-    private AssetsDO findByPk(Serializable id) {
+    public AssetsDO findByPk(Serializable id) {
         return jdbcTemplate.query("SELECT * FROM assets WHERE id=?", makeResultSetExtractor(), id);
     }
 }

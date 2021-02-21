@@ -13,9 +13,7 @@ import com.github.iceant.point.assetshub.webui.utils.validate.ValidateStrategy;
 import com.github.iceant.point.assetshub.webui.utils.validate.ValidateUtil;
 import com.github.iceant.point.assetshub.webui.utils.validate.functions.NotEmptyFunction;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = {"/api/assets"})
@@ -57,6 +55,30 @@ public class AssetsApiController {
             return WebResponse.makeFail();
         }
 
+    }
+
+    @PostMapping(path = {"/update"})
+    public Object update(@RequestBody AssetsDO assetsDO){
+        AssetsDO updatedAssets = assetsService.update(assetsDO);
+        if(updatedAssets==null){
+            return WebResponse.makeFail();
+        }
+        return WebResponse.makeSuccess().setData(updatedAssets);
+    }
+
+    @RequestMapping(path = {"/get/{id}"})
+    public Object get(@PathVariable("id") Long id){
+        AssetsDO assetsDO = assetsService.findByPk(id);
+        if(assetsDO==null){
+            return WebResponse.makeFail();
+        }
+        return WebResponse.makeSuccess().setData(assetsDO);
+    }
+
+    @RequestMapping(path ={"/delete/{id}"} )
+    public Object delete(@PathVariable("id") Long id){
+        AssetsDO assetsDO = assetsService.delete(new AssetsDO().setId(id));
+        return WebResponse.makeSuccess().setData(assetsDO);
     }
 
 }

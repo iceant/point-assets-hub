@@ -5,5 +5,5 @@ create table if not exists assets(
     artifactId TEXT,
     version TEXT,
     detail TEXT,
-    createDatetime TIMESTAMP
+    createDatetime DATETIME
 );

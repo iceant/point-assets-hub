@@ -36,7 +36,7 @@ public class SecurityApiController {
         if (match) {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(token);
-            return WebResponse.makeSuccess().setData(token);
+            return WebResponse.makeSuccess();
         } else {
             return WebResponse.makeFail().setCode(ResultCode.INVALID_AUTHCODE.ordinal());
         }
