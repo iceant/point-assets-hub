@@ -18,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -269,6 +270,10 @@ public class AppUtil implements ApplicationContextAware {
 
     public static String msg(String code, String defaultMessage, Object ... args){
         return applicationContext.getMessage(code, args, defaultMessage, LocaleContextHolder.getLocale());
+    }
+
+    public static String format(String pattern, Object ... args){
+        return new MessageFormat(pattern, LocaleContextHolder.getLocale()).format(args);
     }
 
     ////////////////////////////////////////////////////////////////////////////////
