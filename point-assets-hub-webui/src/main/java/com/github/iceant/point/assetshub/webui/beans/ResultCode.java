@@ -1,5 +1,7 @@
 package com.github.iceant.point.assetshub.webui.beans;
 
+import com.github.iceant.point.assetshub.webui.utils.converter.StringToInteger;
+
 public enum ResultCode {
     SUCCESS("200", "成功"),
     NOT_LOGIN("400", "没有登录"),
@@ -26,4 +28,8 @@ public enum ResultCode {
 
     private String val;
     private String msg;
+
+    public Integer code(){
+        return new StringToInteger().convertFromAToB(val, -1);
+    }
 }

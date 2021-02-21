@@ -1,16 +1,14 @@
 package com.github.iceant.point.assetshub.webui.controller.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.iceant.point.assetshub.webui.beans.ResultCode;
 import com.github.iceant.point.assetshub.webui.beans.WebResponse;
 import com.github.iceant.point.assetshub.webui.dos.AssetsDO;
 import com.github.iceant.point.assetshub.webui.page.Page;
 import com.github.iceant.point.assetshub.webui.page.PageRequest;
 import com.github.iceant.point.assetshub.webui.services.AssetsService;
 import com.github.iceant.point.assetshub.webui.utils.AppUtil;
-import com.github.iceant.point.assetshub.webui.utils.validate.FieldBasedValidateRule;
-import com.github.iceant.point.assetshub.webui.utils.validate.ValidateResult;
-import com.github.iceant.point.assetshub.webui.utils.validate.ValidateStrategy;
-import com.github.iceant.point.assetshub.webui.utils.validate.ValidateUtil;
+import com.github.iceant.point.assetshub.webui.utils.validate.*;
 import com.github.iceant.point.assetshub.webui.utils.validate.functions.NotEmptyFunction;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +38,9 @@ public class AssetsApiController {
 
         NotEmptyFunction notEmptyFunction = new NotEmptyFunction();
         ValidateStrategy validateStrategy = new ValidateStrategy();
-        validateStrategy.addRule(new FieldBasedValidateRule().setFieldName("groupId").setFieldType(String.class).setValidateFunction(notEmptyFunction).setErrorMessage(AppUtil.msg("errors.empty_value")));
-        validateStrategy.addRule(new FieldBasedValidateRule().setFieldName("artifactId").setFieldType(String.class).setValidateFunction(notEmptyFunction).setErrorMessage(AppUtil.msg("errors.empty_value")));
-        validateStrategy.addRule(new FieldBasedValidateRule().setFieldName("version").setFieldType(String.class).setValidateFunction(notEmptyFunction).setErrorMessage(AppUtil.msg("errors.empty_value")));
+        validateStrategy.addRule(new FieldBasedValidateRule().setFieldName("groupId").setFieldType(String.class).setValidateFunction(notEmptyFunction).setErrorCode(ResultCode.PARAMS_ERROR.code()).setErrorMessage(AppUtil.msg("errors.empty_value")));
+        validateStrategy.addRule(new FieldBasedValidateRule().setFieldName("artifactId").setFieldType(String.class).setValidateFunction(notEmptyFunction).setErrorCode(ResultCode.PARAMS_ERROR.code()).setErrorMessage(AppUtil.msg("errors.empty_value")));
+        validateStrategy.addRule(new FieldBasedValidateRule().setFieldName("version").setFieldType(String.class).setValidateFunction(notEmptyFunction).setErrorCode(ResultCode.PARAMS_ERROR.code()).setErrorMessage(AppUtil.msg("errors.empty_value")));
         ValidateResult validateResult = ValidateUtil.check(param, validateStrategy);
         if (validateResult.hasError()) {
             return WebResponse.makeFail().setData(validateResult.getErrors());
